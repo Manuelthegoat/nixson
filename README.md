@@ -1,4 +1,4 @@
-# Cairn Recovery Partners — static site
+# Refund Fairfund Partners — static site
 
 Six pages, plain HTML + CSS + a little vanilla JS. No build step. Open `index.html`
 or serve the folder (`python3 -m http.server`).
@@ -52,7 +52,7 @@ polished, close the tab. The credibility here comes from the verification table 
 
 ## Single-file build
 
-`cairn-recovery-single.html` is the whole site — all six pages, inlined CSS and JS —
+`Refund Fairfund-recovery-single.html` is the whole site — all six pages, inlined CSS and JS —
 in one self-contained file with a hash router. Routes are `#/home`, `#/services`,
 `#/how-it-works`, `#/resources`, `#/about`, `#/contact`. A deep link to a section
 inside a page uses a colon: `#/resources:recovery-scams`.
