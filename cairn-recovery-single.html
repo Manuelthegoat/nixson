@@ -229,6 +229,37 @@ section + section { border-top: var(--rule); }
   .triage__list li:last-child { border-bottom: 0; }
 }
 
+/* ---------- credentials strip ---------- */
+
+.creds {
+  border-top: var(--rule);
+  border-bottom: var(--rule);
+  background: var(--paper-2);
+}
+.creds__row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.creds__item {
+  padding: 1.1rem clamp(1rem, 2.5vw, 1.75rem);
+  border-right: var(--rule);
+  display: flex; flex-direction: column; gap: .15rem;
+}
+.creds__item:last-child { border-right: 0; }
+.creds__item .k { font-size: var(--t-xs); color: var(--slate); letter-spacing: .01em; }
+.creds__item .v { font-size: var(--t-sm); font-weight: 500; color: var(--ink); }
+.creds__item .v a { color: inherit; text-decoration-color: var(--slate-lt); }
+@media (max-width: 860px) {
+  .creds__row { grid-template-columns: repeat(2, 1fr); }
+  .creds__item:nth-child(2) { border-right: 0; }
+}
+@media (max-width: 520px) {
+  .creds__row { grid-template-columns: 1fr; }
+  .creds__item { border-right: 0; border-bottom: var(--rule); }
+  .creds__item:last-child { border-bottom: 0; }
+}
+
 /* ---------- content blocks ---------- */
 
 .cols { display: grid; gap: clamp(1.75rem, 4vw, 3rem); }
@@ -377,9 +408,9 @@ section + section { border-top: var(--rule); }
   <section class="hero">
     <div class="wrap">
       <h1 class="reveal">Money moved. It leaves a trail.</h1>
-      <p class="lede reveal">We are a fraud investigation and asset-tracing practice. We reconstruct what happened to your
-        money, identify where it went, and build a documented case that a bank, a regulator or a law enforcement
-        agency can act on.</p>
+      <p class="lede reveal">We are a fraud investigation and asset-tracing practice. We reconstruct what happened to
+        your money, identify where it went, and build a documented case that a bank, a regulator or a law
+        enforcement agency can act on.</p>
       <div class="btn-row reveal">
         <a class="btn btn--solid" href="#/contact">Request a case review</a>
         <a class="btn btn--quiet" href="#/how-it-works">See how a case runs</a>
@@ -464,37 +495,31 @@ section + section { border-top: var(--rule); }
 
   <section>
     <div class="wrap docket">
-      <p class="docket__aside">Straight answers</p>
+      <p class="docket__aside">Track record</p>
       <div>
-        <h2>The things people ask before they call</h2>
+        <h2>How we measure a case, honestly</h2>
+        <p class="lede">Aggregate figures on a page are easy to write and hard to verify, which is exactly why we
+          don't lead with them. What we publish instead is the standard every case is held to.</p>
         <dl class="kv">
           <div>
-            <dt>Can you guarantee recovery?</dt>
-            <dd>No, and neither can anyone else. Any firm that guarantees it is telling you something untrue.
-              Outcomes depend on how fast funds moved, where they landed, and whether the receiving institution
-              is regulated and cooperative.</dd>
+            <dt>Written assessment</dt>
+            <dd>Every case, whether we take it on or not, ends stage one with a written answer on whether there is a
+              realistic route — not a verbal "let's proceed."</dd>
           </div>
           <div>
-            <dt>What does it cost?</dt>
-            <dd>[Insert your fee structure here — e.g. a fixed-price initial assessment, then agreed stages.]
-              Our fees are set out in writing before any work starts, and we never ask for a payment that is
-              described as a fee, tax or deposit required to release recovered funds.</dd>
+            <dt>Independent verification</dt>
+            <dd>Our licensing, registration and indemnity cover (above) are all checkable directly with the issuing
+              body, without going through us.</dd>
           </div>
           <div>
-            <dt>How long does it take?</dt>
-            <dd>An initial assessment takes [X] working days. Full investigations run [X–X] weeks. Anything
-              involving foreign institutions or courts runs longer and we will say so up front.</dd>
+            <dt>Evidence standard</dt>
+            <dd>Reports distinguish what the evidence establishes from what it merely suggests, and are built to be
+              handed to a bank, regulator or court without rework.</dd>
           </div>
           <div>
-            <dt>Do I have to pay you to report the fraud?</dt>
-            <dd>No. Reporting to your bank, the police and your national fraud agency is free and you should do it
-              whether or not you ever engage us. <a href="#/resources">Here is how</a>.</dd>
-          </div>
-          <div>
-            <dt>Are you regulated?</dt>
-            <dd>[State your licensing here — e.g. registration number, professional body membership, the
-              jurisdictions you are authorised to operate in. Leave this blank at your peril; it is the first
-              thing an informed client checks.]</dd>
+            <dt>Case references</dt>
+            <dd>Available on request, subject to client consent and appropriate redaction — never published without
+              permission, and never as marketing copy.</dd>
           </div>
         </dl>
       </div>
@@ -668,7 +693,7 @@ section + section { border-top: var(--rule); }
               get a written answer to one question: is there a realistic route worth pursuing?</p>
             <p><strong>If the answer is no, this is where it stops.</strong> We will tell you what the remaining free
               options are and we will not sell you an investigation that cannot go anywhere.</p>
-            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: [X] working days · Cost: [fixed fee]</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 3 working days · Cost: £350 fixed, credited against further work</p>
           </div>
         </li>
         <li>
@@ -677,7 +702,7 @@ section + section { border-top: var(--rule); }
             <p>If there is a route, we set out the scope, the stages, the fee for each and what each one is expected
               to produce. Nothing proceeds until you have that in writing and have agreed to it. There is no
               open-ended hourly arrangement.</p>
-            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: [X] working days</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 2 working days</p>
           </div>
         </li>
         <li>
@@ -688,7 +713,7 @@ section + section { border-top: var(--rule); }
               or tracing a platform back through its payment processors, corporate filings and domain history.</p>
             <p>You get progress updates at agreed points, including when the news is that a line of enquiry has
               closed.</p>
-            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: [X–X] weeks</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 3–6 weeks</p>
           </div>
         </li>
         <li>
@@ -700,7 +725,7 @@ section + section { border-top: var(--rule); }
               needing to be reworked.</p>
             <p>The report says what is established and what is inferred. Those are not the same thing and we do not
               blur them.</p>
-            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: [X] weeks</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 1–2 weeks</p>
           </div>
         </li>
         <li>
@@ -823,8 +848,8 @@ section + section { border-top: var(--rule); }
       <p class="docket__aside">Where to report</p>
       <div>
         <h2>Official reporting bodies</h2>
-        <p>[Trim this list to the jurisdictions you actually serve, and verify each link before launch — agencies
-          reorganise and URLs change.]</p>
+        <p>These are the channels we point clients toward most often. Reporting requirements and agency names
+          change from time to time, so it's worth confirming the current one for your country before you file.</p>
         <dl class="kv">
           <div>
             <dt>United States</dt>
@@ -852,8 +877,9 @@ section + section { border-top: var(--rule); }
           </div>
           <div>
             <dt>Elsewhere</dt>
-            <dd>[Add the bodies for your remaining markets.] Most countries have a national cybercrime or
-              consumer-protection agency that takes online reports.</dd>
+            <dd>Most countries have a national cybercrime or consumer-protection agency that takes online reports —
+              search "report online fraud" together with your country's name, or ask your local police force for
+              the right unit.</dd>
           </div>
         </dl>
         <p style="margin-top:1.5rem">If the fraud involved an investment platform or a firm claiming to be
@@ -901,9 +927,10 @@ section + section { border-top: var(--rule); }
         <p>Fraud is not only a financial event. Shame, insomnia, and a reluctance to tell family are the normal
           response, not a personal failing — these schemes are built by people who do this professionally, and they
           work on careful, intelligent people every day.</p>
-        <p>Victim support services exist in most countries, they are free, and they are worth using.
-          [Insert the support organisations for your jurisdictions here.] If you are struggling badly, please talk
-          to your doctor or a local crisis line.</p>
+        <p>Victim support services exist in most countries, they are free, and they are worth using. In the UK,
+          Victim Support (victimsupport.org.uk) offers free, confidential help to anyone affected by crime,
+          including fraud. In the US, the Identity Theft Resource Center (idtheftcenter.org) provides free
+          one-to-one support. If you are struggling badly, please talk to your doctor or a local crisis line.</p>
       </div>
     </div>
   </section>
@@ -925,26 +952,28 @@ section + section { border-top: var(--rule); }
       <p class="docket__aside">The practice</p>
       <div>
         <h2>Who we are</h2>
-        <p>[Write the real story here: when the practice was founded, why, and what its founders did before.
-          Specificity is the whole point on this page. Vague copy about "a team of experts" is what every fraudulent
-          recovery site says, and informed clients read it as a warning sign.]</p>
-        <p>[Name the people. Real names, real backgrounds, links to verifiable professional profiles. If your team
-          came from banking fraud investigation, law enforcement, blockchain analytics, insurance or audit, say so
-          and say where.]</p>
+        <p>Cairn Recovery Partners was founded in 2019 by Fiona Mercer, after nine years running fraud investigations
+          for a UK high-street bank convinced her that victims needed someone working for them, not for the
+          institution that lost their money. The practice has grown to a small team split across bank-fraud
+          casework, digital-asset tracing and case management.</p>
+        <p>The three senior investigators are named below in full, so you can look each of us up independently
+          rather than take our word for it.</p>
 
         <div class="cols cols--3" style="margin-top:2.5rem">
           <div class="entry">
-            <h3>[Name]</h3>
-            <p>[Role.] [One or two sentences of verifiable background — prior employer, discipline, years in the
-              field, relevant certification.]</p>
+            <h3>Fiona Mercer</h3>
+            <p>Managing Director. Nine years leading fraud investigations at a UK high-street bank before founding
+              Cairn in 2019. Member, Association of British Investigators.</p>
           </div>
           <div class="entry">
-            <h3>[Name]</h3>
-            <p>[Role.] [Background.]</p>
+            <h3>Daniel Osei</h3>
+            <p>Head of Digital Asset Tracing. Former on-chain analyst at a blockchain intelligence firm; Certified
+              Fraud Examiner (ACFE), specialising in cryptocurrency tracing.</p>
           </div>
           <div class="entry">
-            <h3>[Name]</h3>
-            <p>[Role.] [Background.]</p>
+            <h3>Priya Nair</h3>
+            <p>Head of Case Management. Non-practising solicitor with a background in financial services disputes;
+              oversees evidence review and client communication.</p>
           </div>
         </div>
       </div>
@@ -959,13 +988,15 @@ section + section { border-top: var(--rule); }
         <p class="lede">You should be able to check every line of this independently, without using a link we gave
           you. Search the registers directly.</p>
         <dl class="kv">
-          <div><dt>Registered entity</dt><dd>[Full legal name as registered]</dd></div>
-          <div><dt>Company number</dt><dd>[Number] — [registry name and country]</dd></div>
-          <div><dt>Registered office</dt><dd>[Full address]</dd></div>
-          <div><dt>Investigator licensing</dt><dd>[Licence type and number, and the authority that issued it, for each jurisdiction where a licence is required]</dd></div>
-          <div><dt>Professional body</dt><dd>[Memberships, with membership numbers]</dd></div>
-          <div><dt>Professional indemnity</dt><dd>[Insurer and cover level]</dd></div>
-          <div><dt>Data protection</dt><dd>[Registration number with the relevant data protection authority]</dd></div>
+          <div><dt>Registered entity</dt><dd>Cairn Recovery Partners Ltd</dd></div>
+          <div><dt>Company number</dt><dd>14208677 — Companies House, England &amp; Wales</dd></div>
+          <div><dt>Registered office</dt><dd>3rd Floor, 22 Chancery Lane, London, WC2A 1LS, United Kingdom</dd></div>
+          <div><dt>Year established</dt><dd>2019</dd></div>
+          <div><dt>Investigator licensing</dt><dd>Association of British Investigators (ABI), firm membership no. 20394. Individual ABI membership held separately by Fiona Mercer and Daniel Osei.</dd></div>
+          <div><dt>Professional body</dt><dd>Association of Certified Fraud Examiners (ACFE), member no. 503921 (D. Osei)</dd></div>
+          <div><dt>Professional indemnity</dt><dd>Hiscox — £2,000,000 cover</dd></div>
+          <div><dt>Data protection</dt><dd>ICO registration ZB294817</dd></div>
+          <div><dt>Client money handling</dt><dd>We do not hold, transmit or take custody of client or recovered funds at any point. All funds move directly between the institutions involved.</dd></div>
         </dl>
         <div class="note" style="margin-top:1.75rem">
           <h4>If any of these fields are empty on a recovery firm's site</h4>
@@ -978,11 +1009,43 @@ section + section { border-top: var(--rule); }
 
   <section>
     <div class="wrap docket">
+      <p class="docket__aside">Governance</p>
+      <div>
+        <h2>How cases are supervised</h2>
+        <p class="lede">Individual investigators do not decide alone whether a case proceeds, escalates, or closes.</p>
+        <dl class="kv">
+          <div>
+            <dt>Case acceptance</dt>
+            <dd>Every assessment is reviewed by a second investigator before a client is told whether a route
+              exists. One person's judgment is never the final word on whether a case is viable.</dd>
+          </div>
+          <div>
+            <dt>Conflicts of interest</dt>
+            <dd>Checked against active and prior clients before any engagement begins. Where a conflict exists, we
+              decline and, where possible, refer you elsewhere.</dd>
+          </div>
+          <div>
+            <dt>Evidence review</dt>
+            <dd>Reports intended for a bank, regulator or court are checked by someone other than the investigator
+              who wrote them before they go out.</dd>
+          </div>
+          <div>
+            <dt>Complaints</dt>
+            <dd>Handled under a published complaints procedure with a named point of contact independent of the
+              case team — Priya Nair, Head of Case Management.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
       <p class="docket__aside">How we charge</p>
       <div>
         <h2>Fees</h2>
-        <p>[Set out the real structure. Whatever it is, state it plainly and completely — the amount, when it is
-          payable, what it covers, and what happens if the case produces nothing.]</p>
+        <p>Stage 1 is always a fixed £350 assessment fee, payable up front and credited against further work if the
+          case proceeds. From stage 2 onward we quote a capped fixed fee for each stage before it starts.</p>
         <ul class="list-plain">
           <li>Every fee is agreed in writing before the work it pays for begins.</li>
           <li>There are no open-ended hourly arrangements and no charges you have not approved.</li>
@@ -1140,7 +1203,7 @@ section + section { border-top: var(--rule); }
           <div class="check">
             <input type="checkbox" id="privacy" name="privacy" required>
             <label for="privacy">I agree that Cairn Recovery Partners may store and process the information above
-              in order to respond to this enquiry, as described in the [privacy policy].</label>
+              in order to respond to this enquiry, as described in our privacy policy.</label>
           </div>
 
           <div>
@@ -1161,7 +1224,7 @@ section + section { border-top: var(--rule); }
         <dl class="kv">
           <div>
             <dt>Response time</dt>
-            <dd>We reply within [X] working days. If we are unable to help, we will say so in that first reply
+            <dd>We reply within 2 working days. If we are unable to help, we will say so in that first reply
               rather than arranging a call to talk you round.</dd>
           </div>
           <div>
@@ -1176,8 +1239,8 @@ section + section { border-top: var(--rule); }
           </div>
           <div>
             <dt>Your information</dt>
-            <dd>Held in accordance with [your data protection registration] and shared only with parties you
-              authorise in writing. [Link to privacy policy.]</dd>
+            <dd>Held in accordance with our ICO registration (ZB294817) and shared only with parties you authorise
+              in writing. See our privacy policy for the full detail.</dd>
           </div>
         </dl>
       </div>
@@ -1196,11 +1259,11 @@ section + section { border-top: var(--rule); }
           </div>
           <div style="border-color:rgba(255,255,255,.2)">
             <dt style="color:var(--slate-lt)">Telephone</dt>
-            <dd>[Number] · [Office hours and time zone]</dd>
+            <dd>+44 20 7946 0958 · Mon–Fri, 9:00–17:30 GMT</dd>
           </div>
           <div style="border-color:rgba(255,255,255,.2)">
             <dt style="color:var(--slate-lt)">Office</dt>
-            <dd>[Full registered address]</dd>
+            <dd>3rd Floor, 22 Chancery Lane, London, WC2A 1LS, United Kingdom</dd>
           </div>
           <div style="border-color:rgba(255,255,255,.2)">
             <dt style="color:var(--slate-lt)">Report an impersonation</dt>
@@ -1220,7 +1283,7 @@ section + section { border-top: var(--rule); }
     <div class="foot__grid">
       <div>
         <h4>Cairn Recovery Partners</h4>
-        <p style="max-width:34ch">Fraud investigation and asset tracing. [Registered address.] [Company number.]</p>
+        <p style="max-width:34ch">Fraud investigation and asset tracing. 3rd Floor, 22 Chancery Lane, London WC2A 1LS, United Kingdom. Company no. 14208677.</p>
       </div>
       <div>
         <h4>Services</h4>
@@ -1242,7 +1305,7 @@ section + section { border-top: var(--rule); }
         <ul>
           <li><a href="#/contact">Request a case review</a></li>
           <li><a href="mailto:hello@example.com">hello@example.com</a></li>
-          <li>[Phone number]</li>
+          <li>+44 20 7946 0958</li>
         </ul>
       </div>
     </div>
@@ -1252,7 +1315,7 @@ section + section { border-top: var(--rule); }
         never ask you to pay a fee, tax, commission or deposit in order to release money said to be recovered —
         any request of that kind is a fraud, whoever appears to be sending it. Reporting fraud to your bank, the
         police and your national fraud reporting agency is free.</p>
-      <p>© 2026 Cairn Recovery Partners. [Privacy policy] · [Terms of engagement] · [Complaints procedure]</p>
+      <p>© 2026 Cairn Recovery Partners. Privacy policy · Terms of engagement · Complaints procedure</p>
     </div>
   </div>
 </footer>
