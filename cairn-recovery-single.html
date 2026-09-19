@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cairn Recovery Partners — Fraud investigation and asset tracing</title>
+<meta name="description" content="Cairn Recovery Partners investigates fraud losses, traces where money went, and builds the evidence banks, regulators and law enforcement need to act.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Cairn Recovery Partners — shared stylesheet
+   Palette: slate-navy ink, cool paper, pine green, brass hairline
+   Type:    Newsreader (display) / IBM Plex Sans (text + UI)
+   ============================================================ */
+
+:root {
+  --ink:      #0F2231;
+  --ink-2:    #1B3346;
+  --slate:    #5B7387;
+  --slate-lt: #8398A7;
+  --paper:    #F4F5F2;
+  --paper-2:  #EAECE8;
+  --mist:     #DCE1DE;
+  --pine:     #1E5B4F;
+  --pine-dk:  #133E35;
+  --brass:    #A9812F;
+  --flag:     #8A2F24;
+
+  --measure: 62ch;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --rule: 1px solid var(--mist);
+
+  /* modular scale, 1.25 */
+  --t-xs:  0.8125rem;
+  --t-sm:  0.9375rem;
+  --t-base: 1.0625rem;
+  --t-md:  clamp(1.15rem, 0.5vw + 1rem, 1.3rem);
+  --t-lg:  clamp(1.45rem, 1vw + 1.1rem, 1.8rem);
+  --t-xl:  clamp(1.9rem, 2vw + 1.2rem, 2.6rem);
+  --t-2xl: clamp(2.4rem, 4vw + 1rem, 3.9rem);
+
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: var(--t-base);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { max-width: 100%; display: block; }
+
+h1, h2, h3, .display {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0 0 .6em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--t-2xl); }
+h2 { font-size: var(--t-xl); }
+h3 { font-size: var(--t-lg); }
+h4 { font-size: var(--t-md); font-weight: 600; margin: 0 0 .5em; }
+p  { margin: 0 0 1.1em; max-width: var(--measure); }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--pine); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--pine-dk); }
+
+:focus-visible {
+  outline: 2px solid var(--pine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: var(--paper);
+  padding: .75rem 1rem; z-index: 100;
+}
+.skip:focus { left: 0; }
+
+/* ---------- layout ---------- */
+
+.wrap { width: min(1180px, 100%); margin-inline: auto; padding-inline: var(--gutter); }
+.narrow { width: min(760px, 100%); margin-inline: auto; padding-inline: var(--gutter); }
+
+section { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+section + section { border-top: var(--rule); }
+
+/* asymmetric docket grid: a slim marginal column + the content column */
+.docket {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+.docket__aside {
+  font-size: var(--t-xs);
+  color: var(--slate);
+  letter-spacing: .02em;
+  padding-top: .45rem;
+  border-top: 2px solid var(--brass);
+}
+@media (max-width: 760px) {
+  .docket { grid-template-columns: 1fr; gap: 1rem; }
+}
+
+.stack > * + * { margin-top: 1.1em; }
+.lede { font-size: var(--t-md); color: var(--ink-2); line-height: 1.55; }
+
+/* ---------- header ---------- */
+
+.masthead {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: var(--rule);
+}
+.masthead__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; min-height: 4.5rem;
+}
+.brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--ink); }
+.brand__mark { width: 26px; height: 30px; flex: none; }
+.brand__name {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.32rem; line-height: 1.1; letter-spacing: -0.01em;
+}
+.brand__name span { display: block; font-family: inherit; font-size: .62rem; letter-spacing: .14em; color: var(--slate); }
+
+.nav { display: flex; align-items: center; gap: clamp(1rem, 2vw, 1.9rem); }
+.nav a {
+  font-size: var(--t-sm); color: var(--ink-2); text-decoration: none;
+  padding-block: .4rem; border-bottom: 2px solid transparent;
+}
+.nav a:hover { border-bottom-color: var(--brass); }
+.nav a[aria-current="page"] { border-bottom-color: var(--pine); color: var(--ink); }
+
+.nav-toggle {
+  display: none; background: none; border: var(--rule); border-radius: 3px;
+  padding: .5rem .7rem; font: inherit; font-size: var(--t-sm); color: var(--ink); cursor: pointer;
+}
+
+@media (max-width: 940px) {
+  .nav-toggle { display: block; }
+  .nav {
+    position: absolute; inset: 100% 0 auto 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--paper); border-bottom: var(--rule);
+    padding: .5rem var(--gutter) 1.25rem;
+  }
+  .nav[hidden] { display: none; }
+  .nav a { border-bottom: var(--rule); padding-block: .85rem; }
+  .nav .btn { margin-top: .9rem; text-align: center; }
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-block; font: inherit; font-size: var(--t-sm); font-weight: 500;
+  padding: .72rem 1.35rem; border-radius: 3px; cursor: pointer;
+  text-decoration: none; border: 1px solid transparent;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+.btn--solid { background: var(--pine); color: #fff; }
+.btn--solid:hover { background: var(--pine-dk); color: #fff; }
+.btn--quiet { border-color: var(--slate-lt); color: var(--ink); background: transparent; }
+.btn--quiet:hover { border-color: var(--ink); color: var(--ink); background: var(--paper-2); }
+.btn-row { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+
+/* ---------- hero ---------- */
+
+.hero { padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 5vw, 4rem); }
+.hero h1 { max-width: 16ch; }
+.hero .lede { max-width: 54ch; }
+.reveal { opacity: 0; transform: translateY(10px); animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
+.reveal:nth-child(2) { animation-delay: .09s; }
+.reveal:nth-child(3) { animation-delay: .18s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+/* the "first 24 hours" strip — the one bold element on the home page */
+.triage {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.triage__head {
+  padding: 1.1rem clamp(1.1rem, 3vw, 1.9rem);
+  border-bottom: 1px solid rgba(255,255,255,.16);
+  display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: baseline; justify-content: space-between;
+}
+.triage__head h2 { color: var(--paper); font-size: var(--t-lg); margin: 0; }
+.triage__head p { color: var(--slate-lt); font-size: var(--t-sm); margin: 0; }
+.triage__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+.triage__list li {
+  padding: clamp(1.1rem, 3vw, 1.9rem);
+  border-right: 1px solid rgba(255,255,255,.16);
+}
+.triage__list li:last-child { border-right: 0; }
+.triage__list .n {
+  font-family: "Newsreader", Georgia, serif; font-size: 1.5rem; color: var(--brass);
+  display: block; line-height: 1; margin-bottom: .5rem;
+}
+.triage__list h3 { color: var(--paper); font-size: var(--t-base); font-family: inherit; font-weight: 600; margin-bottom: .35rem; }
+.triage__list p { color: #C6D0D8; font-size: var(--t-sm); margin: 0; }
+.triage__list a { color: #fff; }
+@media (max-width: 800px) {
+  .triage__list { grid-template-columns: 1fr; }
+  .triage__list li { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.16); }
+  .triage__list li:last-child { border-bottom: 0; }
+}
+
+/* ---------- content blocks ---------- */
+
+.cols { display: grid; gap: clamp(1.75rem, 4vw, 3rem); }
+.cols--2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.cols--3 { grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); }
+
+.entry { border-top: 1px solid var(--ink); padding-top: 1.1rem; }
+.entry h3 { font-size: var(--t-md); margin-bottom: .4rem; }
+.entry p { font-size: var(--t-sm); color: var(--ink-2); }
+
+/* numbered sequence — only used where content is genuinely a sequence */
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+.steps > li {
+  counter-increment: step;
+  display: grid; grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  padding-block: clamp(1.75rem, 4vw, 2.6rem);
+  border-top: var(--rule);
+}
+.steps > li:last-child { border-bottom: var(--rule); }
+.steps > li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.9rem; color: var(--brass); line-height: 1;
+}
+@media (max-width: 620px) {
+  .steps > li { grid-template-columns: 1fr; gap: .5rem; }
+}
+
+.kv { border-top: var(--rule); margin: 0; }
+.kv div { display: grid; grid-template-columns: 13rem minmax(0,1fr); gap: 1rem; padding: 1rem 0; border-bottom: var(--rule); }
+.kv dt { color: var(--slate); font-size: var(--t-sm); }
+.kv dd { margin: 0; }
+@media (max-width: 620px) { .kv div { grid-template-columns: 1fr; gap: .2rem; } }
+
+/* callouts */
+.note {
+  border-left: 3px solid var(--brass);
+  background: var(--paper-2);
+  padding: 1.15rem 1.35rem;
+  border-radius: 0 3px 3px 0;
+  font-size: var(--t-sm);
+}
+.note--alert { border-left-color: var(--flag); }
+.note h4 { margin-bottom: .35rem; }
+.note p { max-width: none; }
+
+.band { background: var(--ink); color: var(--paper); }
+.band h2 { color: var(--paper); }
+.band p { color: #C6D0D8; }
+.band a { color: #fff; }
+.band .btn--quiet { border-color: rgba(255,255,255,.4); color: #fff; }
+.band .btn--quiet:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+
+.tag {
+  display: inline-block; font-size: var(--t-xs); color: var(--slate);
+  border: var(--rule); border-radius: 999px; padding: .15rem .65rem; margin: 0 .3rem .4rem 0;
+}
+
+.list-plain { list-style: none; padding: 0; margin: 0; max-width: var(--measure); }
+.list-plain li { padding: .55rem 0 .55rem 1.5rem; border-bottom: var(--rule); position: relative; font-size: var(--t-sm); }
+.list-plain li::before {
+  content: ""; position: absolute; left: 0; top: 1.15em;
+  width: .5rem; height: 1px; background: var(--brass);
+}
+
+/* ---------- form ---------- */
+
+.form { display: grid; gap: 1.15rem; max-width: 46rem; }
+.field { display: grid; gap: .35rem; }
+.field label { font-size: var(--t-sm); font-weight: 500; }
+.field .hint { font-size: var(--t-xs); color: var(--slate); }
+.field input, .field select, .field textarea {
+  font: inherit; font-size: var(--t-sm);
+  padding: .7rem .8rem;
+  border: 1px solid var(--slate-lt);
+  border-radius: 3px;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+}
+.field textarea { min-height: 8.5rem; resize: vertical; }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { border-color: var(--pine); }
+.field--pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem; }
+@media (max-width: 620px) { .field--pair { grid-template-columns: 1fr; } }
+.check { display: grid; grid-template-columns: auto 1fr; gap: .65rem; align-items: start; font-size: var(--t-sm); }
+.check input { width: 1.05rem; height: 1.05rem; margin-top: .25rem; }
+.form-status { font-size: var(--t-sm); padding: .8rem 1rem; border-radius: 3px; background: var(--paper-2); border-left: 3px solid var(--pine); }
+.form-status[hidden] { display: none; }
+
+/* ---------- footer ---------- */
+
+.foot { background: var(--ink-2); color: #C6D0D8; padding-block: clamp(3rem, 6vw, 4.5rem) 2rem; font-size: var(--t-sm); }
+.foot a { color: #E6EBEE; text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+.foot h4 { color: var(--paper); font-size: var(--t-sm); font-weight: 600; margin-bottom: .8rem; }
+.foot__grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 2rem; }
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.foot__legal {
+  margin-top: 2.75rem; padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,.14);
+  font-size: var(--t-xs); color: var(--slate-lt); line-height: 1.6;
+}
+.foot__legal p { max-width: 90ch; }
+@media (max-width: 860px) { .foot__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .foot__grid { grid-template-columns: 1fr; } }
+
+
+/* --- single-file router --- */
+[hidden] { display: none !important; }
+.page:focus { outline: none; }
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="brand" href="#/home">
+      <svg class="brand__mark" viewBox="0 0 26 30" aria-hidden="true">
+        <rect x="6" y="22" width="14" height="6" rx="2" fill="#0F2231"/>
+        <rect x="4"  y="14" width="18" height="6" rx="2" fill="#1E5B4F"/>
+        <rect x="7"  y="7"  width="12" height="5" rx="2" fill="#A9812F"/>
+        <circle cx="13" cy="3" r="2.4" fill="#0F2231"/>
+      </svg>
+      <span class="brand__name">Cairn<span>Recovery Partners</span></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="#/home" data-route="home">Home</a>
+      <a href="#/services" data-route="services">What we handle</a>
+      <a href="#/how-it-works" data-route="how-it-works">How it works</a>
+      <a href="#/resources" data-route="resources">Report it yourself</a>
+      <a href="#/about" data-route="about">About</a>
+      <a href="#/contact" data-route="contact" class="btn btn--solid">Request a case review</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page" id="page-home" data-route="home" hidden>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="reveal">Money moved. It leaves a trail.</h1>
+      <p class="lede reveal">We are a fraud investigation and asset-tracing practice. We reconstruct what happened to your
+        money, identify where it went, and build a documented case that a bank, a regulator or a law enforcement
+        agency can act on.</p>
+      <div class="btn-row reveal">
+        <a class="btn btn--solid" href="#/contact">Request a case review</a>
+        <a class="btn btn--quiet" href="#/how-it-works">See how a case runs</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0; border-top:0;">
+    <div class="wrap">
+      <div class="triage">
+        <div class="triage__head">
+          <h2>Do these three things first — before you hire anyone</h2>
+          <p>They are free, and they matter more than anything we can do later.</p>
+        </div>
+        <ol class="triage__list">
+          <li>
+            <span class="n">01</span>
+            <h3>Tell your bank today</h3>
+            <p>Card and transfer disputes have short statutory windows. Ask them to attempt a recall and to
+              record the date you reported it.</p>
+          </li>
+          <li>
+            <span class="n">02</span>
+            <h3>File an official report</h3>
+            <p>Reporting to the police and the relevant national fraud body costs nothing and creates the reference
+              number every later step depends on. <a href="#/resources">Where to report</a>.</p>
+          </li>
+          <li>
+            <span class="n">03</span>
+            <h3>Preserve everything</h3>
+            <p>Keep messages, receipts, wallet addresses and transaction IDs exactly as they are. Screenshot before
+              anything gets deleted.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">What we do</p>
+      <div>
+        <h2>Investigation and evidence, not promises</h2>
+        <p class="lede">Nobody can guarantee that stolen money comes back. What can be done is establish the facts
+          quickly and put them in front of the parties who have the power to freeze, recall or prosecute.</p>
+
+        <div class="cols cols--3" style="margin-top:2.5rem">
+          <div class="entry">
+            <h3>Trace the funds</h3>
+            <p>Follow payments through bank rails, payment processors and public blockchains to the accounts,
+              exchanges or merchants that received them.</p>
+          </div>
+          <div class="entry">
+            <h3>Identify the counterparty</h3>
+            <p>Open-source and commercial-database research to attribute accounts, companies, domains and phone
+              numbers to real, servable entities.</p>
+          </div>
+          <div class="entry">
+            <h3>Package the case</h3>
+            <p>A written report with an exhibit index, prepared to the standard a bank's fraud team, a regulator or
+              a prosecutor expects to receive.</p>
+          </div>
+          <div class="entry">
+            <h3>Escalate the complaint</h3>
+            <p>Structured complaints to the receiving institution, the payment scheme, the financial ombudsman or
+              the relevant regulator in the jurisdiction concerned.</p>
+          </div>
+          <div class="entry">
+            <h3>Support legal action</h3>
+            <p>Work alongside your own solicitor on freezing orders, disclosure applications and civil claims.
+              We are investigators — <a href="#/about">we do not provide legal advice</a>.</p>
+          </div>
+          <div class="entry">
+            <h3>Tell you when to stop</h3>
+            <p>If the trail ends at an unregulated exchange or a jurisdiction with no realistic route to recovery,
+              we say so in writing rather than billing you to keep looking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Straight answers</p>
+      <div>
+        <h2>The things people ask before they call</h2>
+        <dl class="kv">
+          <div>
+            <dt>Can you guarantee recovery?</dt>
+            <dd>No, and neither can anyone else. Any firm that guarantees it is telling you something untrue.
+              Outcomes depend on how fast funds moved, where they landed, and whether the receiving institution
+              is regulated and cooperative.</dd>
+          </div>
+          <div>
+            <dt>What does it cost?</dt>
+            <dd>[Insert your fee structure here — e.g. a fixed-price initial assessment, then agreed stages.]
+              Our fees are set out in writing before any work starts, and we never ask for a payment that is
+              described as a fee, tax or deposit required to release recovered funds.</dd>
+          </div>
+          <div>
+            <dt>How long does it take?</dt>
+            <dd>An initial assessment takes [X] working days. Full investigations run [X–X] weeks. Anything
+              involving foreign institutions or courts runs longer and we will say so up front.</dd>
+          </div>
+          <div>
+            <dt>Do I have to pay you to report the fraud?</dt>
+            <dd>No. Reporting to your bank, the police and your national fraud agency is free and you should do it
+              whether or not you ever engage us. <a href="#/resources">Here is how</a>.</dd>
+          </div>
+          <div>
+            <dt>Are you regulated?</dt>
+            <dd>[State your licensing here — e.g. registration number, professional body membership, the
+              jurisdictions you are authorised to operate in. Leave this blank at your peril; it is the first
+              thing an informed client checks.]</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap docket">
+      <p class="docket__aside" style="color:var(--slate-lt)">Warning</p>
+      <div>
+        <h2>If someone has already contacted you offering to get your money back</h2>
+        <p class="lede">Be extremely careful. Approaching fraud victims with an unsolicited recovery offer is itself
+          one of the most common follow-up scams. Lists of people who have already lost money are traded between
+          criminal groups precisely because those people are the easiest to approach a second time.</p>
+        <p>We do not cold-call, cold-email or message people on social media. If someone claiming to be from Cairn
+          contacts you out of the blue, it is not us — please <a href="#/contact">tell us</a> so we can report it.</p>
+        <div class="btn-row" style="margin-top:1.5rem">
+          <a class="btn btn--quiet" href="#/resources">How to spot a recovery scam</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow" style="text-align:center">
+      <h2>Start with an assessment, not a contract</h2>
+      <p style="margin-inline:auto">Send us what happened. We will tell you whether there is a realistic trail worth
+        following — and if there isn't, we will tell you that instead.</p>
+      <div class="btn-row" style="justify-content:center; margin-top:1.5rem">
+        <a class="btn btn--solid" href="#/contact">Request a case review</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+  <div class="page" id="page-services" data-route="services" hidden>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>What we handle</h1>
+      <p class="lede">Different frauds leave different trails. What follows is what each type of case actually
+        involves, and — just as importantly — what limits it runs into.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Bank transfers</p>
+      <div>
+        <h2>Authorised push payment and invoice fraud</h2>
+        <p>You were persuaded to send a transfer yourself: a fake bank "safe account" call, a hijacked email thread
+          changing the payment details on a real invoice, a conveyancing or payroll redirection.</p>
+        <p>These cases move fast. Funds are usually pulled out of the receiving account within hours, so the first
+          priority is a recall request through the sending bank and, where the scheme allows it, a reimbursement
+          claim. Our work is establishing the account chain and documenting the deception clearly enough that the
+          claim is not dismissed as an ordinary payment you simply regret.</p>
+        <ul class="list-plain" style="margin-top:1.25rem">
+          <li>Account-to-account chain reconstruction from your statements and the bank's response</li>
+          <li>Reimbursement claim and complaint drafting, including escalation to the ombudsman</li>
+          <li>Attribution of the beneficiary account holder and any company registered behind it</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Cards</p>
+      <div>
+        <h2>Card fraud and unauthorised charges</h2>
+        <p>Unrecognised charges, subscriptions you never agreed to, or a merchant that took payment and delivered
+          nothing. Card scheme chargeback rules give you a defined route with defined deadlines, and most failed
+          claims fail on evidence and timing rather than on the merits.</p>
+        <p>Where a chargeback is the right route, we will tell you how to run it yourself for free. We take on these
+          cases when the sum is significant, the merchant is disputing, or the transaction sits across several
+          cards and accounts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Digital assets</p>
+      <div>
+        <h2>Cryptocurrency theft and fake trading platforms</h2>
+        <p>Public blockchains are the one place where the trail is genuinely permanent. Transactions can be followed
+          from your wallet through mixers, bridges and intermediary addresses to the point where funds reach a
+          service that knows who its customer is.</p>
+        <p>That last point is the whole game. Tracing is straightforward; recovery depends on the funds landing at a
+          regulated exchange that will respond to a properly evidenced request or a court order. Where they land at
+          an unregulated platform in a jurisdiction that will not cooperate, a trace may still be useful for a
+          police report or a tax loss claim — but we will be clear that the money is unlikely to come back.</p>
+        <div class="note" style="margin-top:1.5rem">
+          <h4>On "crypto recovery experts"</h4>
+          <p>No one can reverse a confirmed blockchain transaction, extract funds from a wallet without its keys,
+            or "hack the scammer back". Anyone offering that is selling you a second fraud.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Investments</p>
+      <div>
+        <h2>Investment and boiler-room fraud</h2>
+        <p>Cloned firms using a real regulated company's details, unregistered brokers, forex and commodity schemes,
+          and platforms showing a rising balance that cannot be withdrawn without paying one more charge.</p>
+        <p>The investigation covers the corporate structure behind the platform, the payment processors that handled
+          your deposits, the domain and hosting history, and whether the entity was ever authorised in the
+          jurisdiction it claimed. Processor-level evidence is often the most productive route, because processors
+          are regulated even when the platform is not.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Social engineering</p>
+      <div>
+        <h2>Romance and long-term relationship fraud</h2>
+        <p>These cases usually involve many payments over many months, through several channels — transfers, gift
+          cards, crypto, parcels. They are also the cases where people most often delay reporting, because the loss
+          is not only financial.</p>
+        <p>We handle them the same way we handle any other: reconstruct the payment timeline, identify the channels
+          that are still recoverable, and set out plainly which ones are not. We will also point you to specialist
+          victim support, which is free and, in our experience, matters as much as the investigation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap docket">
+      <p class="docket__aside" style="color:var(--slate-lt)">Scope</p>
+      <div>
+        <h2>What we do not do</h2>
+        <p class="lede">Being clear about this is part of the service.</p>
+        <ul class="list-plain">
+          <li style="border-color:rgba(255,255,255,.16)">We do not provide legal advice or represent you in court. We work with your solicitor.</li>
+          <li style="border-color:rgba(255,255,255,.16)">We do not access accounts, devices or systems belonging to anyone else.</li>
+          <li style="border-color:rgba(255,255,255,.16)">We do not contact or confront the people who defrauded you.</li>
+          <li style="border-color:rgba(255,255,255,.16)">We do not take cases where the only realistic outcome is a bill for you.</li>
+          <li style="border-color:rgba(255,255,255,.16)">We never ask for a payment to release recovered funds. That request is always a fraud.</li>
+        </ul>
+        <div class="btn-row" style="margin-top:1.75rem">
+          <a class="btn btn--quiet" href="#/how-it-works">See how a case runs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+  <div class="page" id="page-how-it-works" data-route="how-it-works" hidden>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>How a case runs</h1>
+      <p class="lede">Five stages. You approve each one before it starts, you know what it costs before it starts,
+        and you can stop at any point.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0; border-top:0;">
+    <div class="wrap">
+      <ol class="steps">
+        <li>
+          <div>
+            <h3>Assessment</h3>
+            <p>You send us the timeline and the documents you still have. We look at how the money left, where it
+              went, how long ago, and whether any regulated party sits in the chain. At the end of this stage you
+              get a written answer to one question: is there a realistic route worth pursuing?</p>
+            <p><strong>If the answer is no, this is where it stops.</strong> We will tell you what the remaining free
+              options are and we will not sell you an investigation that cannot go anywhere.</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: [X] working days · Cost: [fixed fee]</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Engagement</h3>
+            <p>If there is a route, we set out the scope, the stages, the fee for each and what each one is expected
+              to produce. Nothing proceeds until you have that in writing and have agreed to it. There is no
+              open-ended hourly arrangement.</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: [X] working days</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Tracing</h3>
+            <p>The investigative work. Depending on the case that means reconstructing the account chain from bank
+              records, following transactions across public blockchains to a service that holds identity records,
+              or tracing a platform back through its payment processors, corporate filings and domain history.</p>
+            <p>You get progress updates at agreed points, including when the news is that a line of enquiry has
+              closed.</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: [X–X] weeks</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Evidence package</h3>
+            <p>A written report: the timeline, the payment chain, the attribution of each counterparty, the
+              supporting exhibits with an index, and the methodology used to reach each conclusion. It is written
+              to be handed straight to a bank fraud team, a regulator, a police unit or your solicitor without
+              needing to be reworked.</p>
+            <p>The report says what is established and what is inferred. Those are not the same thing and we do not
+              blur them.</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: [X] weeks</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Escalation</h3>
+            <p>Getting the package in front of whoever can act: a recall or freeze request to the receiving
+              institution, a complaint to the regulator or ombudsman, a submission to the relevant law enforcement
+              agency, or disclosure material for your solicitor to use in a civil claim or freezing application.</p>
+            <p>Decisions at this stage belong to those bodies, not to us. What we control is that they receive a
+              case that is complete and properly evidenced.</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Duration: depends entirely on the institutions involved</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Honest limits</p>
+      <div>
+        <h2>What determines whether anything comes back</h2>
+        <p class="lede">Mostly things that were decided in the first few days, before anyone was hired.</p>
+        <div class="cols cols--2" style="margin-top:2rem">
+          <div class="entry">
+            <h3>How quickly it was reported</h3>
+            <p>Recall and freeze requests work on hours and days. A case reported the same week has options that a
+              case reported six months later does not.</p>
+          </div>
+          <div class="entry">
+            <h3>Where the money landed</h3>
+            <p>A regulated bank or exchange can be compelled or persuaded. An unregulated platform in a
+              non-cooperating jurisdiction usually cannot.</p>
+          </div>
+          <div class="entry">
+            <h3>How many hops it took</h3>
+            <p>Each transfer through another account, wallet or bridge adds cost and reduces the chance of a
+              recoverable endpoint. Some trails simply end.</p>
+          </div>
+          <div class="entry">
+            <h3>Whether records survived</h3>
+            <p>Deleted messaging threads, closed accounts and expired platform logs remove evidence permanently.
+              This is why preserving everything matters so much.</p>
+          </div>
+        </div>
+        <div class="note" style="margin-top:2rem">
+          <h4>A note on expectations</h4>
+          <p>In a meaningful proportion of cases the honest outcome is a documented explanation of what happened and
+            a report you can use for a police file, an insurance claim or a tax loss — not returned money. We would
+            rather you know that before you engage us than after.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="narrow" style="text-align:center">
+      <h2>Stage one is a question, not a commitment</h2>
+      <p style="margin-inline:auto">Tell us what happened and we will tell you whether there is anything worth doing.</p>
+      <div class="btn-row" style="justify-content:center; margin-top:1.5rem">
+        <a class="btn btn--solid" href="#/contact">Request a case review</a>
+        <a class="btn btn--quiet" href="#/resources">Or report it yourself, free</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+  <div class="page" id="page-resources" data-route="resources" hidden>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Report it yourself. It's free.</h1>
+      <p class="lede">Everything on this page costs nothing and you do not need us to do any of it. If you only read
+        one page on this site, read this one — and read it before you pay anybody, including us.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0; border-top:0;">
+    <div class="wrap">
+      <ol class="steps">
+        <li>
+          <div>
+            <h3>Call your bank, then get it in writing</h3>
+            <p>Use the number printed on your card or your bank's official app — not a number given to you by
+              whoever contacted you. Ask them to attempt a recall of the payment, to note the exact date and time
+              you reported it, and to give you a reference number. Card and transfer disputes have deadlines, and
+              the reported date is what those deadlines run from.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Secure your accounts</h3>
+            <p>Change passwords for your email first, then banking, then everything that shares that password. Turn
+              on two-factor authentication. If you installed any remote-access or "support" software during the
+              incident, remove it and have the device checked before you log back into anything financial.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>File an official report</h3>
+            <p>Report to the police and to your country's fraud reporting body. This creates the official record
+              that banks, regulators and insurers ask for, and it feeds the intelligence that gets networks shut
+              down. The list below is a starting point — confirm the correct body for where you live.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Write the timeline down now</h3>
+            <p>Dates, amounts, account numbers, wallet addresses, transaction IDs, phone numbers, usernames, website
+              addresses, and how each contact was made. Do this while it is fresh. Screenshot conversations before
+              accounts are deleted — they often are, within days.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Where to report</p>
+      <div>
+        <h2>Official reporting bodies</h2>
+        <p>[Trim this list to the jurisdictions you actually serve, and verify each link before launch — agencies
+          reorganise and URLs change.]</p>
+        <dl class="kv">
+          <div>
+            <dt>United States</dt>
+            <dd>FBI Internet Crime Complaint Center — <a href="https://www.ic3.gov">ic3.gov</a><br>
+              Federal Trade Commission — <a href="https://reportfraud.ftc.gov">reportfraud.ftc.gov</a></dd>
+          </div>
+          <div>
+            <dt>United Kingdom</dt>
+            <dd>Action Fraud — <a href="https://www.actionfraud.police.uk">actionfraud.police.uk</a><br>
+              In Scotland, report to Police Scotland on 101.</dd>
+          </div>
+          <div>
+            <dt>Canada</dt>
+            <dd>Canadian Anti-Fraud Centre — <a href="https://antifraudcentre-centreantifraude.ca">antifraudcentre-centreantifraude.ca</a></dd>
+          </div>
+          <div>
+            <dt>Australia</dt>
+            <dd>Scamwatch — <a href="https://www.scamwatch.gov.au">scamwatch.gov.au</a><br>
+              ReportCyber — <a href="https://www.cyber.gov.au">cyber.gov.au</a></dd>
+          </div>
+          <div>
+            <dt>Nigeria</dt>
+            <dd>Economic and Financial Crimes Commission — <a href="https://www.efcc.gov.ng">efcc.gov.ng</a><br>
+              Also report to your bank's fraud desk and the Nigeria Police Force.</dd>
+          </div>
+          <div>
+            <dt>Elsewhere</dt>
+            <dd>[Add the bodies for your remaining markets.] Most countries have a national cybercrime or
+              consumer-protection agency that takes online reports.</dd>
+          </div>
+        </dl>
+        <p style="margin-top:1.5rem">If the fraud involved an investment platform or a firm claiming to be
+          regulated, also report it to the financial regulator in that jurisdiction. Regulators publish warning
+          lists, and a cloned-firm report can stop the next person.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="recovery-scams" class="band">
+    <div class="wrap docket">
+      <p class="docket__aside" style="color:var(--slate-lt)">Second-wave fraud</p>
+      <div>
+        <h2>How to recognise a recovery scam</h2>
+        <p class="lede">Being defrauded once makes you a target for being defrauded again. Contact details of
+          victims circulate, and follow-up approaches offering to recover the lost money are among the most common
+          frauds there are. Apply this list to us as rigorously as to anyone else.</p>
+
+        <ul class="list-plain">
+          <li style="border-color:rgba(255,255,255,.16)"><strong>They contacted you.</strong> Unsolicited calls, emails, WhatsApp or social messages offering recovery are the single strongest warning sign.</li>
+          <li style="border-color:rgba(255,255,255,.16)"><strong>They guarantee results.</strong> No investigator, lawyer or agency can guarantee recovery. Nobody.</li>
+          <li style="border-color:rgba(255,255,255,.16)"><strong>They want a fee to release your funds.</strong> A "tax", "clearance charge", "commission" or "deposit" needed before recovered money can be sent to you is always fraudulent.</li>
+          <li style="border-color:rgba(255,255,255,.16)"><strong>They want payment in crypto or gift cards.</strong> Legitimate firms invoice and are paid through traceable channels.</li>
+          <li style="border-color:rgba(255,255,255,.16)"><strong>They claim to be from a government agency.</strong> Agencies do not charge for fraud recovery and do not cold-call offering it.</li>
+          <li style="border-color:rgba(255,255,255,.16)"><strong>They press you to decide today.</strong> Manufactured urgency is a tool for stopping you from checking.</li>
+          <li style="border-color:rgba(255,255,255,.16)"><strong>They ask for remote access, passwords or seed phrases.</strong> No legitimate investigation ever needs these.</li>
+          <li style="border-color:rgba(255,255,255,.16)"><strong>You cannot verify them.</strong> No registered company, no licence number, no verifiable address, no named people.</li>
+        </ul>
+
+        <div style="margin-top:2rem; padding:1.35rem 1.5rem; border:1px solid rgba(255,255,255,.3); border-radius:4px">
+          <h4 style="color:var(--paper)">Before you engage any firm, including this one</h4>
+          <p>Look the company up in the official companies register for its stated country. Check any licence number
+            directly on the regulator's website rather than through a link the firm sent you. Ask for the fee
+            structure in writing. Then wait a day before deciding — a legitimate firm will still be there tomorrow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Support</p>
+      <div>
+        <h2>The part nobody mentions</h2>
+        <p>Fraud is not only a financial event. Shame, insomnia, and a reluctance to tell family are the normal
+          response, not a personal failing — these schemes are built by people who do this professionally, and they
+          work on careful, intelligent people every day.</p>
+        <p>Victim support services exist in most countries, they are free, and they are worth using.
+          [Insert the support organisations for your jurisdictions here.] If you are struggling badly, please talk
+          to your doctor or a local crisis line.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+  <div class="page" id="page-about" data-route="about" hidden>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>A cairn marks the way back.</h1>
+      <p class="lede">It is a pile of stones left by someone who came through before you, so the next person can find
+        the path. That is roughly the job: work out where the money went, mark the route clearly enough that someone
+        with authority can follow it.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">The practice</p>
+      <div>
+        <h2>Who we are</h2>
+        <p>[Write the real story here: when the practice was founded, why, and what its founders did before.
+          Specificity is the whole point on this page. Vague copy about "a team of experts" is what every fraudulent
+          recovery site says, and informed clients read it as a warning sign.]</p>
+        <p>[Name the people. Real names, real backgrounds, links to verifiable professional profiles. If your team
+          came from banking fraud investigation, law enforcement, blockchain analytics, insurance or audit, say so
+          and say where.]</p>
+
+        <div class="cols cols--3" style="margin-top:2.5rem">
+          <div class="entry">
+            <h3>[Name]</h3>
+            <p>[Role.] [One or two sentences of verifiable background — prior employer, discipline, years in the
+              field, relevant certification.]</p>
+          </div>
+          <div class="entry">
+            <h3>[Name]</h3>
+            <p>[Role.] [Background.]</p>
+          </div>
+          <div class="entry">
+            <h3>[Name]</h3>
+            <p>[Role.] [Background.]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Verify us</p>
+      <div>
+        <h2>Registration and regulation</h2>
+        <p class="lede">You should be able to check every line of this independently, without using a link we gave
+          you. Search the registers directly.</p>
+        <dl class="kv">
+          <div><dt>Registered entity</dt><dd>[Full legal name as registered]</dd></div>
+          <div><dt>Company number</dt><dd>[Number] — [registry name and country]</dd></div>
+          <div><dt>Registered office</dt><dd>[Full address]</dd></div>
+          <div><dt>Investigator licensing</dt><dd>[Licence type and number, and the authority that issued it, for each jurisdiction where a licence is required]</dd></div>
+          <div><dt>Professional body</dt><dd>[Memberships, with membership numbers]</dd></div>
+          <div><dt>Professional indemnity</dt><dd>[Insurer and cover level]</dd></div>
+          <div><dt>Data protection</dt><dd>[Registration number with the relevant data protection authority]</dd></div>
+        </dl>
+        <div class="note" style="margin-top:1.75rem">
+          <h4>If any of these fields are empty on a recovery firm's site</h4>
+          <p>Ask why before you send money or documents. It is a fair question and a legitimate firm will answer it
+            without hesitating.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">How we charge</p>
+      <div>
+        <h2>Fees</h2>
+        <p>[Set out the real structure. Whatever it is, state it plainly and completely — the amount, when it is
+          payable, what it covers, and what happens if the case produces nothing.]</p>
+        <ul class="list-plain">
+          <li>Every fee is agreed in writing before the work it pays for begins.</li>
+          <li>There are no open-ended hourly arrangements and no charges you have not approved.</li>
+          <li>We are paid by invoice through traceable banking channels. Never in gift cards, never in cryptocurrency.</li>
+          <li>We never ask for a payment of any kind as a condition of releasing recovered funds. No legitimate party ever does.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap docket">
+      <p class="docket__aside" style="color:var(--slate-lt)">Standards</p>
+      <div>
+        <h2>What we commit to</h2>
+        <div class="cols cols--2" style="margin-top:1.5rem">
+          <div class="entry" style="border-color:rgba(255,255,255,.35)">
+            <h3 style="color:var(--paper)">We tell you when there is no case</h3>
+            <p style="color:#C6D0D8">Declining work we cannot usefully do is the main thing that separates this
+              practice from the industry's worst end.</p>
+          </div>
+          <div class="entry" style="border-color:rgba(255,255,255,.35)">
+            <h3 style="color:var(--paper)">We do not approach victims</h3>
+            <p style="color:#C6D0D8">No cold calls, no unsolicited emails, no direct messages. Every client comes to
+              us or is referred to us.</p>
+          </div>
+          <div class="entry" style="border-color:rgba(255,255,255,.35)">
+            <h3 style="color:var(--paper)">We separate fact from inference</h3>
+            <p style="color:#C6D0D8">Our reports state what the evidence establishes and what it merely suggests,
+              and label which is which.</p>
+          </div>
+          <div class="entry" style="border-color:rgba(255,255,255,.35)">
+            <h3 style="color:var(--paper)">We work inside the law</h3>
+            <p style="color:#C6D0D8">No unauthorised access to systems, no impersonation, no contact with the
+              people who defrauded you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow" style="text-align:center">
+      <h2>Ask us anything before you commit</h2>
+      <p style="margin-inline:auto">Including the uncomfortable questions. Especially those.</p>
+      <div class="btn-row" style="justify-content:center; margin-top:1.5rem">
+        <a class="btn btn--solid" href="#/contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+  <div class="page" id="page-contact" data-route="contact" hidden>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Request a case review</h1>
+      <p class="lede">An outline is enough to start. You do not need to have everything organised, and you do not
+        need to send us documents yet.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0; border-top:0;">
+    <div class="wrap docket">
+      <p class="docket__aside">Before you write</p>
+      <div>
+        <div class="note note--alert">
+          <h4>If this happened in the last few days, call your bank first</h4>
+          <p>A recall request in the first hours is worth more than anything we can do afterwards. Use the number on
+            your card, report it, then come back here. <a href="#/resources">The full first-48-hours checklist is
+            here</a> — all of it is free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">Your enquiry</p>
+      <div>
+        <form class="form" id="case-form" novalidate>
+          <div class="field--pair">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="field--pair">
+            <div class="field">
+              <label for="phone">Phone <span class="hint">optional</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="country">Country you live in</label>
+              <input type="text" id="country" name="country" autocomplete="country-name" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="type">What kind of fraud was it?</label>
+            <select id="type" name="type" required>
+              <option value="">Select the closest match</option>
+              <option>Bank transfer or invoice redirection</option>
+              <option>Card fraud or unauthorised charges</option>
+              <option>Cryptocurrency theft or fake trading platform</option>
+              <option>Investment or broker fraud</option>
+              <option>Romance or long-term relationship fraud</option>
+              <option>A recovery service that took payment</option>
+              <option>Something else</option>
+            </select>
+          </div>
+
+          <div class="field--pair">
+            <div class="field">
+              <label for="when">Roughly when did it happen?</label>
+              <input type="text" id="when" name="when" placeholder="e.g. last week, or March 2026" required>
+            </div>
+            <div class="field">
+              <label for="amount">Approximate amount lost</label>
+              <input type="text" id="amount" name="amount" placeholder="Include the currency" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="reported">Have you reported it yet?</label>
+            <select id="reported" name="reported" required>
+              <option value="">Select one</option>
+              <option>Yes — to my bank</option>
+              <option>Yes — to the police or a fraud agency</option>
+              <option>Yes — to both</option>
+              <option>Not yet</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="story">What happened?</label>
+            <textarea id="story" name="story" required
+              placeholder="A short timeline is ideal: how you were first contacted, how the payments were made, and what has happened since. Don't worry about polishing it."></textarea>
+            <p class="hint">Please do not include passwords, PINs, full card numbers or wallet recovery phrases.
+              We will never ask for these, and no legitimate investigation needs them.</p>
+          </div>
+
+          <div class="check">
+            <input type="checkbox" id="understand" name="understand" required>
+            <label for="understand">I understand that recovery cannot be guaranteed, that this enquiry does not
+              create an engagement, and that reporting fraud to my bank, the police and my national fraud agency is
+              free and does not require a paid service.</label>
+          </div>
+
+          <div class="check">
+            <input type="checkbox" id="privacy" name="privacy" required>
+            <label for="privacy">I agree that Cairn Recovery Partners may store and process the information above
+              in order to respond to this enquiry, as described in the [privacy policy].</label>
+          </div>
+
+          <div>
+            <button class="btn btn--solid" type="submit">Send enquiry</button>
+          </div>
+
+          <p class="form-status" id="form-status" role="status" tabindex="-1" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap docket">
+      <p class="docket__aside">What happens next</p>
+      <div>
+        <h2>After you send this</h2>
+        <dl class="kv">
+          <div>
+            <dt>Response time</dt>
+            <dd>We reply within [X] working days. If we are unable to help, we will say so in that first reply
+              rather than arranging a call to talk you round.</dd>
+          </div>
+          <div>
+            <dt>No charge to enquire</dt>
+            <dd>Sending this costs nothing and commits you to nothing. Fees only ever apply after a scope has been
+              agreed in writing.</dd>
+          </div>
+          <div>
+            <dt>How we contact you</dt>
+            <dd>From our own domain only, using the details you provide. We do not use messaging apps for first
+              contact and we will never phone you unprompted about a case you have not raised with us.</dd>
+          </div>
+          <div>
+            <dt>Your information</dt>
+            <dd>Held in accordance with [your data protection registration] and shared only with parties you
+              authorise in writing. [Link to privacy policy.]</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap docket">
+      <p class="docket__aside" style="color:var(--slate-lt)">Direct contact</p>
+      <div>
+        <h2>Other ways to reach us</h2>
+        <dl class="kv" style="border-color:rgba(255,255,255,.2)">
+          <div style="border-color:rgba(255,255,255,.2)">
+            <dt style="color:var(--slate-lt)">Email</dt>
+            <dd><a href="mailto:hello@example.com">hello@example.com</a></dd>
+          </div>
+          <div style="border-color:rgba(255,255,255,.2)">
+            <dt style="color:var(--slate-lt)">Telephone</dt>
+            <dd>[Number] · [Office hours and time zone]</dd>
+          </div>
+          <div style="border-color:rgba(255,255,255,.2)">
+            <dt style="color:var(--slate-lt)">Office</dt>
+            <dd>[Full registered address]</dd>
+          </div>
+          <div style="border-color:rgba(255,255,255,.2)">
+            <dt style="color:var(--slate-lt)">Report an impersonation</dt>
+            <dd>If someone has contacted you claiming to be from Cairn, tell us at
+              <a href="mailto:hello@example.com">hello@example.com</a> and report it to your national fraud agency.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <h4>Cairn Recovery Partners</h4>
+        <p style="max-width:34ch">Fraud investigation and asset tracing. [Registered address.] [Company number.]</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#/services">What we handle</a></li>
+          <li><a href="#/how-it-works">How it works</a></li>
+          <li><a href="#/about">About us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Free help</h4>
+        <ul>
+          <li><a href="#/resources">Report it yourself</a></li>
+          <li><a href="#/resources:recovery-scams">Spot a recovery scam</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#/contact">Request a case review</a></li>
+          <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+          <li>[Phone number]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <p>Cairn Recovery Partners provides investigation and asset-tracing services. We do not provide legal,
+        financial or tax advice, and we are not a law firm. We do not guarantee the recovery of any funds. We will
+        never ask you to pay a fee, tax, commission or deposit in order to release money said to be recovered —
+        any request of that kind is a fraud, whoever appears to be sending it. Reporting fraud to your bank, the
+        police and your national fraud reporting agency is free.</p>
+      <p>© 2026 Cairn Recovery Partners. [Privacy policy] · [Terms of engagement] · [Complaints procedure]</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile navigation
+(function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  function isCompact() { return window.matchMedia('(max-width: 940px)').matches; }
+
+  function setOpen(open) {
+    nav.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Close' : 'Menu';
+  }
+
+  function sync() {
+    if (isCompact()) { setOpen(false); }
+    else { nav.hidden = false; toggle.setAttribute('aria-expanded', 'false'); }
+  }
+
+  toggle.addEventListener('click', function () { setOpen(nav.hidden); });
+  window.addEventListener('resize', sync);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isCompact() && !nav.hidden) { setOpen(false); toggle.focus(); }
+  });
+  sync();
+})();
+
+// Contact form — front-end validation only.
+// Replace the submit handler with a real POST to your backend or form service.
+(function () {
+  var form = document.getElementById('case-form');
+  if (!form) return;
+  var status = document.getElementById('form-status');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    status.hidden = false;
+    status.textContent =
+      'This form is not connected to a backend yet. Wire it to your intake system before launch.';
+    status.focus();
+  });
+})();
+
+
+// ---- hash router -------------------------------------------------------
+(function () {
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('[data-route]'));
+  var titles = {'home': 'Home', 'services': 'What we handle', 'how-it-works': 'How it works', 'resources': 'Report it yourself', 'about': 'About', 'contact': 'Request a case review'};
+  var DEFAULT = 'home';
+
+  function parse() {
+    var hash = location.hash || '';
+    // Plain in-page anchors (#main, #recovery-scams) are not routes — leave the
+    // current page alone and let the browser scroll.
+    if (hash && hash.charAt(1) !== '/') return null;
+    var bits = hash.replace(/^#\//, '').split(':');
+    var route = bits[0] || DEFAULT;
+    if (!document.getElementById('page-' + route)) route = DEFAULT;
+    return { route: route, anchor: bits[1] || null };
+  }
+
+  function render(push) {
+    var r = parse();
+    if (!r) return;
+
+    pages.forEach(function (p) { p.hidden = p.dataset.route !== r.route; });
+
+    links.forEach(function (a) {
+      if (a.dataset.route === r.route) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+
+    document.title = titles[r.route] + ' — Cairn Recovery Partners';
+
+    // close the mobile menu on navigation
+    var nav = document.getElementById('site-nav');
+    var toggle = document.querySelector('.nav-toggle');
+    if (nav && toggle && window.matchMedia('(max-width: 940px)').matches) {
+      nav.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.textContent = 'Menu';
+    }
+
+    if (r.anchor) {
+      var target = document.getElementById(r.anchor);
+      if (target) { target.scrollIntoView({ behavior: 'auto', block: 'start' }); return; }
+    }
+    if (push) window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', function () { render(true); });
+  render(false);
+})();
+
+</script>
+</body>
+</html>
