@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
-"""Assemble the six-page site into one self-contained, hash-routed HTML file."""
+﻿#!/usr/bin/env python3
+"""Assemble the site into one self-contained, hash-routed HTML file."""
 
 import re
 import pathlib
 
 SRC = pathlib.Path(__file__).parent
-OUT = pathlib.Path(__file__).parent / "Fairfund Recovery-recovery-single.html"
+OUT = pathlib.Path(__file__).parent / "cairn-recovery-single.html"
 
 ROUTES = [
     ("index.html", "home", "Home"),
@@ -13,13 +13,15 @@ ROUTES = [
     ("how-it-works.html", "how-it-works", "How it works"),
     ("resources.html", "resources", "Report it yourself"),
     ("about.html", "about", "About"),
+    ("faq.html", "faq", "Questions & answers"),
+    ("privacy.html", "privacy", "Privacy"),
     ("contact.html", "contact", "Request a case review"),
 ]
 FILE_TO_ROUTE = {f: r for f, r, _ in ROUTES}
 
 
 def rewrite_links(html: str) -> str:
-    """page.html -> #/page   ·   page.html#frag -> #/page:frag"""
+    """page.html -> #/page   Â·   page.html#frag -> #/page:frag"""
 
     def sub(m):
         page, frag = m.group(1), m.group(2)
@@ -86,7 +88,7 @@ ROUTER_JS = """
 
   function parse() {
     var hash = location.hash || '';
-    // Plain in-page anchors (#main, #recovery-scams) are not routes — leave the
+    // Plain in-page anchors (#main, #recovery-scams) are not routes â€” leave the
     // current page alone and let the browser scroll.
     if (hash && hash.charAt(1) !== '/') return null;
     var bits = hash.replace(/^#\\//, '').split(':');
@@ -106,7 +108,7 @@ ROUTER_JS = """
       else a.removeAttribute('aria-current');
     });
 
-    document.title = titles[r.route] + ' — Fairfund Recovery Partners';
+    document.title = titles[r.route] + ' â€” Fairfund Recovery Partners';
 
     // close the mobile menu on navigation
     var nav = document.getElementById('site-nav');
@@ -136,7 +138,7 @@ doc = f"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fairfund Recovery Partners — Fraud investigation and asset tracing</title>
+<title>Fairfund Recovery Partners â€” Fraud investigation and asset tracing</title>
 <meta name="description" content="Fairfund Recovery Partners investigates fraud losses, traces where money went, and builds the evidence banks, regulators and law enforcement need to act.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,3 +169,5 @@ doc = f"""<!DOCTYPE html>
 
 OUT.write_text(doc, encoding="utf-8")
 print(f"wrote {OUT} ({len(doc):,} bytes)")
+
+

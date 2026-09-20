@@ -504,3 +504,34 @@ body {
   .entry { padding: 1.1rem; }
   .hero::before { right: -16rem; }
 }
+
+/* ---------- content-rich pages ---------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: .85rem;
+  color: var(--pine);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.eyebrow::before { content: ""; width: 1.75rem; height: 1px; background: var(--brass); }
+.insight-section { background: linear-gradient(135deg, rgba(220, 225, 222, .62), rgba(244, 245, 242, .25)); }
+.insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.25rem; }
+.insight-grid article { padding: 1.4rem; border: 1px solid rgba(91, 115, 135, .22); border-radius: 7px; background: rgba(255, 255, 255, .55); }
+.insight-grid h3 { font-size: var(--t-md); margin: .8rem 0 .45rem; }
+.insight-grid p { margin: 0; color: var(--ink-2); font-size: var(--t-sm); }
+.insight-icon { display: inline-grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--pine); color: white; font-family: "Newsreader", Georgia, serif; font-size: .92rem; }
+.text-link { display: inline-flex; align-items: center; gap: .45rem; font-size: var(--t-sm); font-weight: 600; text-decoration: none; }
+.text-link span { font-size: 1.1rem; transition: transform .18s ease; }
+.text-link:hover span { transform: translateX(3px); }
+.faq-list { border-top: var(--rule); }
+.faq-list details { border-bottom: var(--rule); padding: 1.2rem 0; }
+.faq-list summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; color: var(--ink); font-family: "Newsreader", Georgia, serif; font-size: var(--t-lg); line-height: 1.25; list-style: none; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: "+"; flex: 0 0 auto; color: var(--pine); font-family: "IBM Plex Sans", sans-serif; font-size: 1.45rem; font-weight: 400; }
+.faq-list details[open] summary::after { content: "-"; }
+.faq-list details p { margin: .9rem 2.5rem .05rem 0; color: var(--ink-2); }
+@media (max-width: 760px) { .insight-grid { grid-template-columns: 1fr; } }

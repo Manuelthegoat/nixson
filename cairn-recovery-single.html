@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fairfund Recovery Partners — Fraud investigation and asset tracing</title>
+<title>Fairfund Recovery Partners â€” Fraud investigation and asset tracing</title>
 <meta name="description" content="Fairfund Recovery Partners investigates fraud losses, traces where money went, and builds the evidence banks, regulators and law enforcement need to act.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -367,6 +367,186 @@ section + section { border-top: var(--rule); }
 @media (max-width: 860px) { .foot__grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .foot__grid { grid-template-columns: 1fr; } }
 
+/* ---------- elevated presentation ---------- */
+
+body {
+  background:
+    radial-gradient(circle at 92% 0%, rgba(169, 129, 47, .10), transparent 25rem),
+    var(--paper);
+}
+
+.masthead {
+  box-shadow: 0 1px 0 rgba(15, 34, 49, .04), 0 10px 28px rgba(15, 34, 49, .025);
+}
+
+.brand__mark { filter: drop-shadow(0 3px 4px rgba(15, 34, 49, .16)); }
+.brand__name { font-weight: 500; }
+
+.nav a {
+  position: relative;
+  border-bottom: 0;
+  transition: color .18s ease;
+}
+.nav a:not(.btn)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: .1rem;
+  left: 0;
+  height: 2px;
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .2s ease;
+}
+.nav a:not(.btn):hover::after,
+.nav a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+.nav a[aria-current="page"] { border-bottom: 0; }
+
+.btn {
+  border-radius: 999px;
+  box-shadow: 0 1px 1px rgba(15, 34, 49, .08);
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 7px 16px rgba(15, 34, 49, .14); }
+.btn:active { transform: translateY(0); box-shadow: none; }
+.btn--solid { box-shadow: 0 5px 13px rgba(30, 91, 79, .22); }
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(42vw, 38rem);
+  aspect-ratio: 1;
+  right: -12rem;
+  top: -20rem;
+  border: 1px solid rgba(169, 129, 47, .32);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4rem rgba(169, 129, 47, .035), 0 0 0 8rem rgba(169, 129, 47, .025);
+}
+.hero h1 { text-shadow: 0 1px 0 rgba(255, 255, 255, .7); }
+.hero .lede { max-width: 58ch; }
+
+.creds__item { transition: background-color .2s ease; }
+.creds__item:hover { background: rgba(255, 255, 255, .46); }
+
+.triage {
+  box-shadow: 0 18px 38px rgba(15, 34, 49, .16);
+  border-color: rgba(15, 34, 49, .9);
+}
+.triage__list li { transition: background-color .2s ease; }
+.triage__list li:hover { background: rgba(255, 255, 255, .055); }
+
+.entry {
+  position: relative;
+  padding: 1.25rem 1.25rem 1.2rem;
+  border: 1px solid var(--mist);
+  border-top: 3px solid var(--ink);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .48);
+  box-shadow: 0 2px 0 rgba(15, 34, 49, .02);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.entry:hover {
+  transform: translateY(-4px);
+  border-top-color: var(--pine);
+  box-shadow: 0 13px 26px rgba(15, 34, 49, .09);
+}
+.entry h3 { color: var(--ink); }
+
+.note {
+  box-shadow: 0 8px 20px rgba(15, 34, 49, .045);
+  border-radius: 0 7px 7px 0;
+}
+.tag { background: rgba(255, 255, 255, .5); }
+
+.kv div { transition: background-color .18s ease; }
+.kv div:hover { background: rgba(255, 255, 255, .5); }
+.kv dt { padding-left: .75rem; border-left: 2px solid var(--brass); }
+
+.steps > li { transition: background-color .18s ease; }
+.steps > li:hover { background: rgba(255, 255, 255, .42); }
+.steps > li::before { padding-left: .75rem; }
+
+.field input, .field select, .field textarea {
+  box-shadow: inset 0 1px 2px rgba(15, 34, 49, .035);
+  transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+.field input:hover, .field select:hover, .field textarea:hover { border-color: var(--slate); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 0;
+  border-color: var(--pine);
+  box-shadow: 0 0 0 4px rgba(30, 91, 79, .12);
+}
+
+.band { position: relative; overflow: hidden; }
+.band::after {
+  content: "";
+  position: absolute;
+  width: 34rem;
+  height: 34rem;
+  right: -17rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, .10);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3.5rem rgba(255, 255, 255, .025);
+}
+.band .wrap { position: relative; z-index: 1; }
+
+.foot { border-top: 4px solid var(--brass); }
+.foot__grid > div:first-child h4 {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+@media (max-width: 940px) {
+  .nav a:not(.btn)::after { display: none; }
+  .nav a:hover { background: var(--paper-2); }
+}
+
+@media (max-width: 620px) {
+  .entry { padding: 1.1rem; }
+  .hero::before { right: -16rem; }
+}
+
+/* ---------- content-rich pages ---------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: .85rem;
+  color: var(--pine);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.eyebrow::before { content: ""; width: 1.75rem; height: 1px; background: var(--brass); }
+.insight-section { background: linear-gradient(135deg, rgba(220, 225, 222, .62), rgba(244, 245, 242, .25)); }
+.insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.25rem; }
+.insight-grid article { padding: 1.4rem; border: 1px solid rgba(91, 115, 135, .22); border-radius: 7px; background: rgba(255, 255, 255, .55); }
+.insight-grid h3 { font-size: var(--t-md); margin: .8rem 0 .45rem; }
+.insight-grid p { margin: 0; color: var(--ink-2); font-size: var(--t-sm); }
+.insight-icon { display: inline-grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--pine); color: white; font-family: "Newsreader", Georgia, serif; font-size: .92rem; }
+.text-link { display: inline-flex; align-items: center; gap: .45rem; font-size: var(--t-sm); font-weight: 600; text-decoration: none; }
+.text-link span { font-size: 1.1rem; transition: transform .18s ease; }
+.text-link:hover span { transform: translateX(3px); }
+.faq-list { border-top: var(--rule); }
+.faq-list details { border-bottom: var(--rule); padding: 1.2rem 0; }
+.faq-list summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; color: var(--ink); font-family: "Newsreader", Georgia, serif; font-size: var(--t-lg); line-height: 1.25; list-style: none; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: "+"; flex: 0 0 auto; color: var(--pine); font-family: "IBM Plex Sans", sans-serif; font-size: 1.45rem; font-weight: 400; }
+.faq-list details[open] summary::after { content: "-"; }
+.faq-list details p { margin: .9rem 2.5rem .05rem 0; color: var(--ink-2); }
+@media (max-width: 760px) { .insight-grid { grid-template-columns: 1fr; } }
+
 
 /* --- single-file router --- */
 [hidden] { display: none !important; }
@@ -397,6 +577,8 @@ section + section { border-top: var(--rule); }
       <a href="#/how-it-works" data-route="how-it-works">How it works</a>
       <a href="#/resources" data-route="resources">Report it yourself</a>
       <a href="#/about" data-route="about">About</a>
+      <a href="#/faq" data-route="faq">Questions & answers</a>
+      <a href="#/privacy" data-route="privacy">Privacy</a>
       <a href="#/contact" data-route="contact" class="btn btn--solid">Request a case review</a>
     </nav>
   </div>
@@ -526,6 +708,22 @@ section + section { border-top: var(--rule); }
     </div>
   </section>
 
+  <section class="insight-section">
+    <div class="wrap docket">
+      <p class="docket__aside">Case intelligence</p>
+      <div>
+        <p class="eyebrow">A clearer picture</p>
+        <h2>Information that turns a difficult story into a case file.</h2>
+        <p class="lede">A well-run recovery practice starts with structure: the timeline, the payment path, the evidence and the right place to escalate.</p>
+        <div class="insight-grid">
+          <article><span class="insight-icon">01</span><h3>Build the timeline</h3><p>Capture key events, contacts and payments in chronological order so patterns become visible quickly.</p></article>
+          <article><span class="insight-icon">02</span><h3>Map the money</h3><p>Connect accounts, payment platforms and transaction references into a concise funds-flow record.</p></article>
+          <article><span class="insight-icon">03</span><h3>Choose the route</h3><p>Match the evidence to the party with authority to review, dispute, freeze or investigate it.</p></article>
+        </div>
+        <div class="btn-row" style="margin-top:2rem"><a class="btn btn--quiet" href="#/faq">Read common questions</a><a class="text-link" href="#/how-it-works">Explore the five-stage process <span aria-hidden="true">→</span></a></div>
+      </div>
+    </div>
+  </section>
   <section class="band">
     <div class="wrap docket">
       <p class="docket__aside" style="color:var(--slate-lt)">Warning</p>
@@ -561,7 +759,7 @@ section + section { border-top: var(--rule); }
     <div class="wrap">
       <h1>What we handle</h1>
       <p class="lede">Different frauds leave different trails. What follows is what each type of case actually
-        involves, and — just as importantly — what limits it runs into.</p>
+        involves, and â€” just as importantly â€” what limits it runs into.</p>
     </div>
   </section>
 
@@ -611,7 +809,7 @@ section + section { border-top: var(--rule); }
         <p>That last point is the whole game. Tracing is straightforward; recovery depends on the funds landing at a
           regulated exchange that will respond to a properly evidenced request or a court order. Where they land at
           an unregulated platform in a jurisdiction that will not cooperate, a trace may still be useful for a
-          police report or a tax loss claim — but we will be clear that the money is unlikely to come back.</p>
+          police report or a tax loss claim â€” but we will be clear that the money is unlikely to come back.</p>
         <div class="note" style="margin-top:1.5rem">
           <h4>On "crypto recovery experts"</h4>
           <p>No one can reverse a confirmed blockchain transaction, extract funds from a wallet without its keys,
@@ -641,7 +839,7 @@ section + section { border-top: var(--rule); }
       <p class="docket__aside">Social engineering</p>
       <div>
         <h2>Romance and long-term relationship fraud</h2>
-        <p>These cases usually involve many payments over many months, through several channels — transfers, gift
+        <p>These cases usually involve many payments over many months, through several channels â€” transfers, gift
           cards, crypto, parcels. They are also the cases where people most often delay reporting, because the loss
           is not only financial.</p>
         <p>We handle them the same way we handle any other: reconstruct the payment timeline, identify the channels
@@ -693,7 +891,7 @@ section + section { border-top: var(--rule); }
               get a written answer to one question: is there a realistic route worth pursuing?</p>
             <p><strong>If the answer is no, this is where it stops.</strong> We will tell you what the remaining free
               options are and we will not sell you an investigation that cannot go anywhere.</p>
-            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 3 working days · Cost: $350 fixed, credited against further work</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 3 working days Â· Cost: $350 fixed, credited against further work</p>
           </div>
         </li>
         <li>
@@ -713,7 +911,7 @@ section + section { border-top: var(--rule); }
               or tracing a platform back through its payment processors, corporate filings and domain history.</p>
             <p>You get progress updates at agreed points, including when the news is that a line of enquiry has
               closed.</p>
-            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 3–6 weeks</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 3â€“6 weeks</p>
           </div>
         </li>
         <li>
@@ -725,7 +923,7 @@ section + section { border-top: var(--rule); }
               needing to be reworked.</p>
             <p>The report says what is established and what is inferred. Those are not the same thing and we do not
               blur them.</p>
-            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 1–2 weeks</p>
+            <p style="font-size:var(--t-sm); color:var(--slate)">Typical duration: 1â€“2 weeks</p>
           </div>
         </li>
         <li>
@@ -774,7 +972,7 @@ section + section { border-top: var(--rule); }
         <div class="note" style="margin-top:2rem">
           <h4>A note on expectations</h4>
           <p>In a meaningful proportion of cases the honest outcome is a documented explanation of what happened and
-            a report you can use for a police file, an insurance claim or a tax loss — not returned money. We would
+            a report you can use for a police file, an insurance claim or a tax loss â€” not returned money. We would
             rather you know that before you engage us than after.</p>
         </div>
       </div>
@@ -799,7 +997,7 @@ section + section { border-top: var(--rule); }
     <div class="wrap">
       <h1>Report it yourself. It's free.</h1>
       <p class="lede">Everything on this page costs nothing and you do not need us to do any of it. If you only read
-        one page on this site, read this one — and read it before you pay anybody, including us.</p>
+        one page on this site, read this one â€” and read it before you pay anybody, including us.</p>
     </div>
   </section>
 
@@ -809,7 +1007,7 @@ section + section { border-top: var(--rule); }
         <li>
           <div>
             <h3>Call your bank, then get it in writing</h3>
-            <p>Use the number printed on your card or your bank's official app — not a number given to you by
+            <p>Use the number printed on your card or your bank's official app â€” not a number given to you by
               whoever contacted you. Ask them to attempt a recall of the payment, to note the exact date and time
               you reported it, and to give you a reference number. Card and transfer disputes have deadlines, and
               the reported date is what those deadlines run from.</p>
@@ -828,7 +1026,7 @@ section + section { border-top: var(--rule); }
             <h3>File an official report</h3>
             <p>Report to the police and to your country's fraud reporting body. This creates the official record
               that banks, regulators and insurers ask for, and it feeds the intelligence that gets networks shut
-              down. The list below is a starting point — confirm the correct body for where you live.</p>
+              down. The list below is a starting point â€” confirm the correct body for where you live.</p>
           </div>
         </li>
         <li>
@@ -836,7 +1034,7 @@ section + section { border-top: var(--rule); }
             <h3>Write the timeline down now</h3>
             <p>Dates, amounts, account numbers, wallet addresses, transaction IDs, phone numbers, usernames, website
               addresses, and how each contact was made. Do this while it is fresh. Screenshot conversations before
-              accounts are deleted — they often are, within days.</p>
+              accounts are deleted â€” they often are, within days.</p>
           </div>
         </li>
       </ol>
@@ -853,31 +1051,31 @@ section + section { border-top: var(--rule); }
         <dl class="kv">
           <div>
             <dt>United States</dt>
-            <dd>FBI Internet Crime Complaint Center — <a href="https://www.ic3.gov">ic3.gov</a><br>
-              Federal Trade Commission — <a href="https://reportfraud.ftc.gov">reportfraud.ftc.gov</a></dd>
+            <dd>FBI Internet Crime Complaint Center â€” <a href="https://www.ic3.gov">ic3.gov</a><br>
+              Federal Trade Commission â€” <a href="https://reportfraud.ftc.gov">reportfraud.ftc.gov</a></dd>
           </div>
           <div>
             <dt>United Kingdom</dt>
-            <dd>Action Fraud — <a href="https://www.actionfraud.police.uk">actionfraud.police.uk</a><br>
+            <dd>Action Fraud â€” <a href="https://www.actionfraud.police.uk">actionfraud.police.uk</a><br>
               In Scotland, report to Police Scotland on 101.</dd>
           </div>
           <div>
             <dt>Canada</dt>
-            <dd>Canadian Anti-Fraud Centre — <a href="https://antifraudcentre-centreantifraude.ca">antifraudcentre-centreantifraude.ca</a></dd>
+            <dd>Canadian Anti-Fraud Centre â€” <a href="https://antifraudcentre-centreantifraude.ca">antifraudcentre-centreantifraude.ca</a></dd>
           </div>
           <div>
             <dt>Australia</dt>
-            <dd>Scamwatch — <a href="https://www.scamwatch.gov.au">scamwatch.gov.au</a><br>
-              ReportCyber — <a href="https://www.cyber.gov.au">cyber.gov.au</a></dd>
+            <dd>Scamwatch â€” <a href="https://www.scamwatch.gov.au">scamwatch.gov.au</a><br>
+              ReportCyber â€” <a href="https://www.cyber.gov.au">cyber.gov.au</a></dd>
           </div>
           <div>
             <dt>Nigeria</dt>
-            <dd>Economic and Financial Crimes Commission — <a href="https://www.efcc.gov.ng">efcc.gov.ng</a><br>
+            <dd>Economic and Financial Crimes Commission â€” <a href="https://www.efcc.gov.ng">efcc.gov.ng</a><br>
               Also report to your bank's fraud desk and the Nigeria Police Force.</dd>
           </div>
           <div>
             <dt>Elsewhere</dt>
-            <dd>Most countries have a national cybercrime or consumer-protection agency that takes online reports —
+            <dd>Most countries have a national cybercrime or consumer-protection agency that takes online reports â€”
               search "report online fraud" together with your country's name, or ask your local police force for
               the right unit.</dd>
           </div>
@@ -913,7 +1111,7 @@ section + section { border-top: var(--rule); }
           <h4 style="color:var(--paper)">Before you engage any firm, including this one</h4>
           <p>Look the company up in the official companies register for its stated country. Check any licence number
             directly on the regulator's website rather than through a link the firm sent you. Ask for the fee
-            structure in writing. Then wait a day before deciding — a legitimate firm will still be there tomorrow.</p>
+            structure in writing. Then wait a day before deciding â€” a legitimate firm will still be there tomorrow.</p>
         </div>
       </div>
     </div>
@@ -925,7 +1123,7 @@ section + section { border-top: var(--rule); }
       <div>
         <h2>The part nobody mentions</h2>
         <p>Fraud is not only a financial event. Shame, insomnia, and a reluctance to tell family are the normal
-          response, not a personal failing — these schemes are built by people who do this professionally, and they
+          response, not a personal failing â€” these schemes are built by people who do this professionally, and they
           work on careful, intelligent people every day.</p>
         <p>Victim support services exist in most countries, they are free, and they are worth using. In the UK,
           Victim Support (victimsupport.org.uk) offers free, confidential help to anyone affected by crime,
@@ -989,12 +1187,12 @@ section + section { border-top: var(--rule); }
           you. Search the registers directly.</p>
         <dl class="kv">
           <div><dt>Registered entity</dt><dd>Fairfund Recovery Partners Ltd</dd></div>
-          <div><dt>Company number</dt><dd>14208677 — Companies House, England &amp; Wales</dd></div>
+          <div><dt>Company number</dt><dd>14208677 â€” Companies House, England &amp; Wales</dd></div>
           <div><dt>Registered office</dt><dd>3rd Floor, 22 Chancery Lane, London, WC2A 1LS, United Kingdom</dd></div>
           <div><dt>Year established</dt><dd>2019</dd></div>
           <div><dt>Investigator licensing</dt><dd>Association of British Investigators (ABI), firm membership no. 20394. Individual ABI membership held separately by Fiona Mercer and Daniel Osei.</dd></div>
           <div><dt>Professional body</dt><dd>Association of Certified Fraud Examiners (ACFE), member no. 503921 (D. Osei)</dd></div>
-          <div><dt>Professional indemnity</dt><dd>Hiscox — $2,000,000 cover</dd></div>
+          <div><dt>Professional indemnity</dt><dd>Hiscox â€” $2,000,000 cover</dd></div>
           <div><dt>Data protection</dt><dd>ICO registration ZB294817</dd></div>
           <div><dt>Client money handling</dt><dd>We do not hold, transmit or take custody of client or recovered funds at any point. All funds move directly between the institutions involved.</dd></div>
         </dl>
@@ -1032,7 +1230,7 @@ section + section { border-top: var(--rule); }
           <div>
             <dt>Complaints</dt>
             <dd>Handled under a published complaints procedure with a named point of contact independent of the
-              case team — Priya Nair, Head of Case Management.</dd>
+              case team â€” Priya Nair, Head of Case Management.</dd>
           </div>
         </dl>
       </div>
@@ -1098,6 +1296,22 @@ section + section { border-top: var(--rule); }
   </section>
 
 </div>
+  <div class="page" id="page-faq" data-route="faq" hidden>
+  <section class="hero"><div class="wrap"><p class="eyebrow">Frequently asked questions</p><h1>Clear answers, before you start.</h1><p class="lede">A practical overview of the questions people ask when they are trying to understand what an investigation can involve.</p></div></section>
+  <section><div class="wrap docket"><p class="docket__aside">Getting started</p><div><h2>About a case review</h2><div class="faq-list">
+    <details open><summary>What should I send in a first enquiry?</summary><p>A short timeline, the payment method, the approximate date and amount, and any reference numbers you have. Avoid sending passwords, PINs, recovery phrases or full card numbers.</p></details>
+    <details><summary>Do I need to have every document organised first?</summary><p>No. Start with what you have. A strong intake process helps turn messages, bank records and screenshots into a usable sequence later.</p></details>
+    <details><summary>What types of fraud can be investigated?</summary><p>Common categories include transfer fraud, impersonation, card disputes, fake investments, romance scams and cryptocurrency theft. Each leaves a different evidence trail.</p></details>
+    <details><summary>What does a written assessment include?</summary><p>It can identify the known facts, evidence gaps, immediate reporting routes and the next practical action. For a real firm, scope, timings and fees should always be confirmed in writing.</p></details>
+  </div></div></div></section>
+  <section><div class="wrap docket"><p class="docket__aside">Evidence</p><div><h2>Building a useful record</h2><div class="faq-list">
+    <details><summary>Why are screenshots and reference numbers important?</summary><p>They preserve dates, account details and the exact language used. Screenshots are most useful when kept alongside original emails, receipts or transaction records.</p></details>
+    <details><summary>Can cryptocurrency be traced?</summary><p>Public blockchain transactions can often be mapped between wallets and services, but tracing alone does not guarantee identification, freezing or recovery. The route depends on the assets, platform and jurisdiction.</p></details>
+    <details><summary>Should I contact the person who scammed me?</summary><p>Do not send more money or information. Preserve the conversation and use official reporting or platform channels instead of trying to negotiate with a suspected fraudster.</p></details>
+  </div></div></div></section>
+  <section class="band"><div class="wrap docket"><p class="docket__aside" style="color:var(--slate-lt)">Next step</p><div><h2>Still looking for an answer?</h2><p class="lede">Explore the practical reporting checklist or use the enquiry page to see how a professional intake form can be structured.</p><div class="btn-row"><a class="btn btn--solid" href="#/resources">Explore free resources</a><a class="btn btn--quiet" href="#/contact">Request a review</a></div></div></div></section>
+</div>
+  <div class="page" id="page-privacy" data-route="privacy" hidden><section class="hero"><div class="wrap"><p class="eyebrow">Privacy</p><h1>Your information, explained simply.</h1><p class="lede">This page is included as part of a fictional school-project website. The contact form is a front-end demonstration and does not submit information anywhere.</p></div></section><section><div class="wrap docket"><p class="docket__aside">Overview</p><div><h2>What this demo does</h2><dl class="kv"><div><dt>Contact form</dt><dd>The form demonstrates validation in the browser only. It does not send, store or process submitted details.</dd></div><div><dt>Cookies</dt><dd>This static demo does not use analytics, advertising or tracking cookies.</dd></div><div><dt>Third parties</dt><dd>Typography is requested from Google Fonts. A production website should document all third-party services and provide a legally reviewed privacy notice.</dd></div><div><dt>Educational use</dt><dd>All business identity, team, contact and credential details in this concept should be treated as fictional placeholders for a classroom presentation.</dd></div></dl></div></div></section><section class="band"><div class="narrow" style="text-align:center"><h2>A strong site makes privacy easy to find.</h2><p style="margin-inline:auto">This page gives the project a more complete, real-world information architecture without collecting real visitor data.</p><a class="btn btn--solid" href="#/home">Back to home</a></div></section></div>
   <div class="page" id="page-contact" data-route="contact" hidden>
 
   <section class="hero">
@@ -1116,7 +1330,7 @@ section + section { border-top: var(--rule); }
           <h4>If this happened in the last few days, call your bank first</h4>
           <p>A recall request in the first hours is worth more than anything we can do afterwards. Use the number on
             your card, report it, then come back here. <a href="#/resources">The full first-48-hours checklist is
-            here</a> — all of it is free.</p>
+            here</a> â€” all of it is free.</p>
         </div>
       </div>
     </div>
@@ -1178,9 +1392,9 @@ section + section { border-top: var(--rule); }
             <label for="reported">Have you reported it yet?</label>
             <select id="reported" name="reported" required>
               <option value="">Select one</option>
-              <option>Yes — to my bank</option>
-              <option>Yes — to the police or a fraud agency</option>
-              <option>Yes — to both</option>
+              <option>Yes â€” to my bank</option>
+              <option>Yes â€” to the police or a fraud agency</option>
+              <option>Yes â€” to both</option>
               <option>Not yet</option>
             </select>
           </div>
@@ -1259,7 +1473,7 @@ section + section { border-top: var(--rule); }
           </div>
           <div style="border-color:rgba(255,255,255,.2)">
             <dt style="color:var(--slate-lt)">Telephone</dt>
-            <dd>+44 20 7946 0958 · Mon–Fri, 9:00–17:30 GMT</dd>
+            <dd>+44 20 7946 0958 Â· Monâ€“Fri, 9:00â€“17:30 GMT</dd>
           </div>
           <div style="border-color:rgba(255,255,255,.2)">
             <dt style="color:var(--slate-lt)">Office</dt>
@@ -1310,7 +1524,7 @@ section + section { border-top: var(--rule); }
       </div>
     </div>
     <div class="foot__legal">
-    © 2026 Fairfund Recovery Partners. Privacy policy · Terms of engagement · Complaints procedure</p>
+      <p>© 2026 Fairfund Recovery Partners — fictional school-project design concept. <a href="#/privacy">Privacy</a> · <a href="#/faq">Questions &amp; answers</a></p>
     </div>
   </div>
 </footer>
@@ -1370,12 +1584,12 @@ section + section { border-top: var(--rule); }
 (function () {
   var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
   var links = Array.prototype.slice.call(document.querySelectorAll('[data-route]'));
-  var titles = {'home': 'Home', 'services': 'What we handle', 'how-it-works': 'How it works', 'resources': 'Report it yourself', 'about': 'About', 'contact': 'Request a case review'};
+  var titles = {'home': 'Home', 'services': 'What we handle', 'how-it-works': 'How it works', 'resources': 'Report it yourself', 'about': 'About', 'faq': 'Questions & answers', 'privacy': 'Privacy', 'contact': 'Request a case review'};
   var DEFAULT = 'home';
 
   function parse() {
     var hash = location.hash || '';
-    // Plain in-page anchors (#main, #recovery-scams) are not routes — leave the
+    // Plain in-page anchors (#main, #recovery-scams) are not routes â€” leave the
     // current page alone and let the browser scroll.
     if (hash && hash.charAt(1) !== '/') return null;
     var bits = hash.replace(/^#\//, '').split(':');
@@ -1395,7 +1609,7 @@ section + section { border-top: var(--rule); }
       else a.removeAttribute('aria-current');
     });
 
-    document.title = titles[r.route] + ' — Fairfund Recovery Partners';
+    document.title = titles[r.route] + ' â€” Fairfund Recovery Partners';
 
     // close the mobile menu on navigation
     var nav = document.getElementById('site-nav');
