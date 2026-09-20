@@ -1,4 +1,4 @@
-# Refund Fairfund Partners — static site
+# Fairfund Recovery Partners — static site
 
 Six pages, plain HTML + CSS + a little vanilla JS. No build step. Open `index.html`
 or serve the folder (`python3 -m http.server`).
@@ -43,7 +43,7 @@ Also:
 
 ## What I deliberately left out
 
-No guaranteed-recovery language, no invented success rates or "£XXm recovered" counters,
+No guaranteed-recovery language, no invented success rates or "$XXm recovered" counters,
 no testimonials, no countdown timers or urgency devices, no live-chat popup. Those are the
 exact signals that regulators, banks and search engines use to flag recovery-fraud sites —
 and they are also what makes real victims, who have already been fooled once by something
@@ -52,7 +52,7 @@ polished, close the tab. The credibility here comes from the verification table 
 
 ## Single-file build
 
-`Refund Fairfund-recovery-single.html` is the whole site — all six pages, inlined CSS and JS —
+`Fairfund Recovery-recovery-single.html` is the whole site — all six pages, inlined CSS and JS —
 in one self-contained file with a hash router. Routes are `#/home`, `#/services`,
 `#/how-it-works`, `#/resources`, `#/about`, `#/contact`. A deep link to a section
 inside a page uses a colon: `#/resources:recovery-scams`.

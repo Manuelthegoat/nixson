@@ -5,7 +5,7 @@ import re
 import pathlib
 
 SRC = pathlib.Path(__file__).parent
-OUT = pathlib.Path(__file__).parent / "Refund Fairfund-recovery-single.html"
+OUT = pathlib.Path(__file__).parent / "Fairfund Recovery-recovery-single.html"
 
 ROUTES = [
     ("index.html", "home", "Home"),
@@ -106,7 +106,7 @@ ROUTER_JS = """
       else a.removeAttribute('aria-current');
     });
 
-    document.title = titles[r.route] + ' — Refund Fairfund Partners';
+    document.title = titles[r.route] + ' — Fairfund Recovery Partners';
 
     // close the mobile menu on navigation
     var nav = document.getElementById('site-nav');
@@ -136,8 +136,8 @@ doc = f"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Refund Fairfund Partners — Fraud investigation and asset tracing</title>
-<meta name="description" content="Refund Fairfund Partners investigates fraud losses, traces where money went, and builds the evidence banks, regulators and law enforcement need to act.">
+<title>Fairfund Recovery Partners — Fraud investigation and asset tracing</title>
+<meta name="description" content="Fairfund Recovery Partners investigates fraud losses, traces where money went, and builds the evidence banks, regulators and law enforcement need to act.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap" rel="stylesheet">
